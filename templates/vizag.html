@@ -1,0 +1,16 @@
+{% extends 'layout.html' %} {% block body %}
+<html>
+
+<body style="background-image: radial-gradient(rgb(150, 146, 146),rgb(112, 206, 154));text-align:center;">
+
+
+    <h1 style=" color:green; "> SELECT A THEATRE</h1>
+    {% for row in data_values %} <br>
+
+    <h3><a href="index ">{{row[2]}} </a></h3>
+    {% endfor %}
+</body>
+
+{% endblock %}
+
+</html>
