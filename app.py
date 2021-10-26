@@ -3,6 +3,8 @@ from functools import wraps
 from flask_mysqldb import MySQL
 import mysql.connector
 from werkzeug.utils import append_slash_redirect
+from flask import make_response
+
 
 mydatabase = mysql.connector.connect(
     host ='localhost', user ='root',
@@ -93,7 +95,7 @@ def vizag():
     item = mycursor.fetchall()
     return render_template('vizag.html', data_values = item)
 
-''' @app.route('/movies',methods=['GET','POST'])
+'''@app.route('/movies',methods=['GET','POST'])
 @is_logged_in
 def movies():
     mycursor.execute('SELECT * FROM movies_list')
@@ -122,7 +124,15 @@ def logout():
 
 
 
-
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=10'
+    return response
     
 if __name__=='__main__':
     app.secret_key='secret123'
